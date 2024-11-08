@@ -10,7 +10,7 @@ function Jam() {
       volume: 0.4,
     },
     {
-    //   url: "https://youtu.be/J16OHA4MRa0?t=118",
+      //   url: "https://youtu.be/J16OHA4MRa0?t=118",
       url: "https://www.youtube.com/shorts/yMtcaZmUBmo",
       volume: 0.2,
     },
@@ -72,11 +72,14 @@ function Jam() {
                 volume={video.volume}
               ></ReactPlayer>
             )}
-            {(index == 4 && !highlight) && <ReactPlayer url={"https://www.youtube.com/watch?v=23I8OtXCs3o"}
-            onStart={() => setHighlight(true)}
+            {index == 4 && !highlight && (
+              <ReactPlayer
+                url={"https://www.youtube.com/watch?v=23I8OtXCs3o"}
+                onStart={() => setHighlight(true)}
                 width="100%"
                 height="100%"
-            ></ReactPlayer>}
+              ></ReactPlayer>
+            )}
           </Grid>
         ))}
       </Grid>

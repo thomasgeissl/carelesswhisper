@@ -10,10 +10,22 @@ function Intro() {
     "Free like playing cheesy melodies such as 'Careless Whisper'",
     "",
     "Have you ever seen a FREE jazz performance where the sax player wasn't center stage?",
-    "And was not a man"
+    "And was not a man",
   ];
   return (
-    <Box width={"100vw"} height={"100vh"} onClick={() => setStep(step + 1)}>
+    <Box
+      width={"100vw"}
+      height={"100vh"}
+      onClick={() => {
+        setStep(step + 1);
+        if (step > steps.length - 2) {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth", // for a smooth scroll effect; you can omit this if you want an instant scroll
+          });
+        }
+      }}
+    >
       {steps.map((text, index) => {
         if (step < index) {
           return <Box key={`step-${index}`}></Box>;
