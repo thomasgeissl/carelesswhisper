@@ -7,7 +7,7 @@ function Intro() {
   const steps = [
     "Have you ever been to a FREE jazz performance",
     "One that was truly free",
-    "Free like playing cheesy melodies such as 'Careless Whisper'",
+    "Free like playing simple melodies such as 'Careless Whisper'",
     "",
     "Have you ever seen a FREE jazz performance where the sax player wasn't center stage?",
     "And was not a man",
