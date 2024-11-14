@@ -3,19 +3,21 @@ import { Box, Grid, Grid2, Typography } from "@mui/material";
 import ReactPlayer from "react-player";
 
 function Intro() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1);
   const steps = [
-    "Have you ever been to a FREE jazz performance",
-    "One that was truly free",
-    "Free like playing simple melodies such as 'Careless Whisper'",
+    "Have you ever been to a FREE jazz performance?",
+    "One that was truly free?",
+    "Free like playing simple melodies such as 'Careless Whisper?'",
     "",
     "Have you ever seen a FREE jazz performance where the sax player wasn't center stage?",
-    "And was not a man",
+    "And was not a man?",
+    "Have you ever caught yourself thinking I could do the same?",
   ];
   return (
     <Box
       width={"100vw"}
       height={"100vh"}
+      padding={"12px"}
       onClick={() => {
         setStep(step + 1);
         if (step > steps.length - 2) {
@@ -26,6 +28,10 @@ function Intro() {
         }
       }}
     >
+        {step === -1 && <Box width={"100%"} height={"100%"} textAlign={"center"}>
+            <img src={"https://www.musikmachen.de/app/uploads/webp/2019/04/SAX_Saxophon_reinigen_Teaser_1200x780.webp"} style={{width: "100%", height: "100%", objectFit: "cover"}}></img>
+            {/* <img src={"https://media.gettyimages.com/id/942171920/photo/musician-with-saxophone.jpg?s=612x612&w=0&k=20&c=8SNPWLiw-KZ7ASc2NGe6dp0kOFaMHlVDXJmbaRF3YXw="}></img> */}
+            </Box>}
       {steps.map((text, index) => {
         if (step < index) {
           return <Box key={`step-${index}`}></Box>;

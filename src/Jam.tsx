@@ -1,48 +1,11 @@
 import { useState } from "react";
 import { Box, Grid, Grid2 } from "@mui/material";
 import ReactPlayer from "react-player";
+import useStore from "./store";
 
 function Jam() {
   const [highlight, setHighlight] = useState(false);
-  const videos = [
-    {
-      url: "https://www.youtube.com/shorts/J-4lB80g5iA",
-      volume: 0.4,
-    },
-    {
-      //   url: "https://youtu.be/J16OHA4MRa0?t=118",
-      url: "https://www.youtube.com/shorts/yMtcaZmUBmo",
-      volume: 0.2,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=sYufMmU7rk8",
-      volume: 0.4,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=UW1mnJzyyn0",
-      volume: 0.7,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=uGKJkOT_IgU",
-      volume: 1,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=cs-RPPsg_ks",
-      volume: 0.7,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=yOZbmHEG1Jg",
-      volume: 1,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=Q2qXSmwpdFo",
-      volume: 0.7,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=M5CLb8pZowI",
-      volume: 0.4,
-    },
-  ];
+  const videos = useStore((state) => state.videos);
 
   return (
     <Box width={"100vw"} height={"100vh"}>
