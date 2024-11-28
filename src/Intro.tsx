@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Box, Grid, Grid2, Typography } from "@mui/material";
+import { Box, Button, Grid, Grid2, Typography } from "@mui/material";
 import ReactPlayer from "react-player";
+import { getVideosFromURL, setVideosInURL } from "./store";
 
 function Intro() {
   const [step, setStep] = useState(-1);
@@ -48,6 +49,12 @@ function Intro() {
           autoplay={true}
         ></ReactPlayer>
       )}
+     {/* <Button onClick={()=>{
+        setVideosInURL()
+      }}>save</Button>
+     <Button onClick={()=>{
+        getVideosFromURL();
+      }}>load</Button> */}
     </Box>
   );
 }
