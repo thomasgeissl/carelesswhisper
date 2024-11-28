@@ -58,7 +58,7 @@ function Intro() {
               return <Box key={`step-${index}`}></Box>;
             }
             return (
-              <Typography key={`step-${index}`} variant="h2">
+              <Typography key={`step-${index}`} variant="h3">
                 {text}
               </Typography>
             );
