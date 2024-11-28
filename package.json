@@ -1,5 +1,6 @@
 {
   "name": "carelesswhisper",
+  "homepage": "https://thomasgeissl.github.io/carelesswhisper",
   "private": true,
   "version": "0.0.0",
   "type": "module",
