@@ -5,6 +5,8 @@ import packageJson from "../package.json";
 interface State {
   version: string;
   videos: any[];
+  started: boolean;
+  setStarted(value: boolean): void;
 }
 interface Video {
   url: string;
@@ -73,6 +75,10 @@ const useStore = create<State>()(
             volume: 0.4,
           },
         ],
+        started: false,
+        setStarted: (value: boolean) => {
+          set({started: value});
+        }
       }),
       {
         name: "app",
