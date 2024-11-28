@@ -6,7 +6,9 @@ interface State {
   version: string;
   videos: any[];
   started: boolean;
+  step: number;
   setStarted(value: boolean): void;
+  setStep(value: number): void;
 }
 interface Video {
   url: string;
@@ -76,8 +78,12 @@ const useStore = create<State>()(
           },
         ],
         started: false,
+        step: -1,
         setStarted: (value: boolean) => {
           set({started: value});
+        },
+        setStep: (value: number) => {
+          set({step: value});
         }
       }),
       {

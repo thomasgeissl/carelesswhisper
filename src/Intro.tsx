@@ -6,7 +6,8 @@ import useStore, { getVideosFromURL, setVideosInURL } from "./store";
 function Intro() {
   const started = useStore((state) => state.started);
   const setStarted = useStore((state) => state.setStarted);
-  const [step, setStep] = useState(-1);
+  const step = useStore((state) => state.step);
+  const setStep = useStore((state) => state.setStep);
   const steps = [
     "Have you ever been to a FREE jazz performance?",
     "One that was truly free?",
@@ -20,8 +21,8 @@ function Intro() {
     <Box
       width={"100vw"}
       height={"100vh"}
-    display={"flex"}
-    flexDirection={"column"}
+      display={"flex"}
+      flexDirection={"column"}
       padding={"12px"}
       onClick={() => {
         setStep(step + 1);
@@ -35,6 +36,7 @@ function Intro() {
     >
       {!started && (
         <Box>
+          <Typography variant="body2">you should use an ad blocker or the brave browser, otherwise it might be even more annoying</Typography>
           <Button variant="outlined" onClick={() => setStarted(true)}>
             start
           </Button>
@@ -75,7 +77,7 @@ function Intro() {
      <Button onClick={()=>{
         getVideosFromURL();
       }}>load</Button> */}
-      <Box flex={1}></Box>
+          <Box flex={1}></Box>
           <Box display={"flex"} padding={"50px"}>
             <Box flex={1}></Box>
             <Button variant="outlined" onClick={() => setStep(step + 1)}>
