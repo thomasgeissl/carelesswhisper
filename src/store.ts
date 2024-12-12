@@ -7,25 +7,30 @@ interface State {
   videos: any[];
   started: boolean;
   step: number;
+  settingsOpen: boolean;
   setStarted(value: boolean): void;
   setStep(value: number): void;
+  setVideos(videos: Video[]): void;
+  setSettingsOpen(value: boolean): void;
 }
 interface Video {
   url: string;
   volume: number;
 }
 
-function getVideosFromURL(): Video[] {
-  const params = new URLSearchParams(window.location.search);
-  const videos = params.get("videos");
-  console.log(videos);
-  return videos ? JSON.parse(decodeURIComponent(videos)) : [];
+function extractVideoId(url: string) {
+  const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/.*[?&]v=([^&]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
 }
 
 function setVideosInURL() {
   const videos = useStore.getState().videos;
+  const urls = videos.map((video) => {
+    return extractVideoId(video.url);
+  });
   const params = new URLSearchParams(window.location.search);
-  params.set("videos", encodeURIComponent(JSON.stringify(videos)));
+  params.set("videos", encodeURIComponent(JSON.stringify(urls)));
   window.history.replaceState(
     null,
     "",
@@ -79,11 +84,18 @@ const useStore = create<State>()(
         ],
         started: false,
         step: -1,
+        settingsOpen: false,
         setStarted: (value: boolean) => {
-          set({started: value});
+          set({ started: value });
         },
         setStep: (value: number) => {
-          set({step: value});
+          set({ step: value });
+        },
+        setVideos: (videos: Video[]) => {
+          set({ videos });
+        },
+        setSettingsOpen: (value: boolean) => {
+          set({ settingsOpen: value });
         }
       }),
       {
@@ -95,6 +107,23 @@ const useStore = create<State>()(
     { name: "app" }
   )
 );
+
+function getVideosFromURL(): Video[] {
+  const params = new URLSearchParams(window.location.search);
+  const videos = params.get("videos");
+  if (videos) {
+    const urls = JSON.parse(decodeURIComponent(videos));
+    const videoObjects = urls.map((url: string) => {
+      return {
+        url: `https://www.youtube.com/watch?v=${url}`,
+        volume: 0.4,
+      };
+      // useStore.set
+    });
+    useStore.getState().setVideos(videoObjects);
+  }
+  return [];
+}
 
 export default useStore;
 export { setVideosInURL, getVideosFromURL };

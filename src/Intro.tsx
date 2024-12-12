@@ -36,10 +36,27 @@ function Intro() {
     >
       {!started && (
         <Box>
-          <Typography variant="body2">you should use an ad blocker or the brave browser, otherwise it might be even more annoying</Typography>
+          <Typography variant="body2">
+            you should use an ad blocker or the brave browser, otherwise it
+            might be even more annoying
+          </Typography>
           <Button variant="outlined" onClick={() => setStarted(true)}>
             start
           </Button>
+          {/* <Button
+            onClick={() => {
+              setVideosInURL();
+            }}
+          >
+            save
+          </Button>
+          <Button
+            onClick={() => {
+              getVideosFromURL();
+            }}
+          >
+            load
+          </Button> */}
         </Box>
       )}
       {started && (
@@ -71,12 +88,6 @@ function Intro() {
               autoplay={true}
             ></ReactPlayer>
           )}
-          {/* <Button onClick={()=>{
-        setVideosInURL()
-      }}>save</Button>
-     <Button onClick={()=>{
-        getVideosFromURL();
-      }}>load</Button> */}
           <Box flex={1}></Box>
           <Box display={"flex"} padding={"50px"}>
             <Box flex={1}></Box>
