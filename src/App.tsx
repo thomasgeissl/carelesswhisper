@@ -18,14 +18,27 @@ function App() {
           {!settingsOpen && (
             <>
               <Jam></Jam>
-              <ShareIcon
-                sx={{ position: "fixed", top: 15, right: 50 }}
-                onClick={() => setVideosInURL()}
-              ></ShareIcon>
-              <SettingsIcon
-                sx={{ position: "fixed", top: 15, right: 15 }}
-                onClick={() => setSettingsOpen(true)}
-              ></SettingsIcon>
+              <Box
+                sx={{
+                  position: "fixed",
+                  top: 15,
+                  right: 15,
+                  backgroundColor: "red",
+                  padding: "8px",
+                  borderRadius: "12px",
+                }}
+                display={"flex"}
+                gap={3}
+              >
+                <ShareIcon
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setVideosInURL()}
+                ></ShareIcon>
+                <SettingsIcon
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setSettingsOpen(true)}
+                ></SettingsIcon>
+              </Box>
             </>
           )}
           {settingsOpen && <Settings></Settings>}
