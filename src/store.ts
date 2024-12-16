@@ -12,6 +12,7 @@ interface State {
   setStep(value: number): void;
   setVideos(videos: Video[]): void;
   setSettingsOpen(value: boolean): void;
+  setVideoUrl(index: number, value: string): void;
 }
 interface Video {
   url: string;
@@ -23,6 +24,16 @@ function extractVideoId(url: string) {
   const match = url.match(regex);
   return match ? match[1] : null;
 }
+
+async function copyToClipboard(text: string) {
+  try {
+      await navigator.clipboard.writeText(text);
+      console.log("Copied to clipboard:", text);
+  } catch (err) {
+      console.error("Failed to copy text:", err);
+  }
+}
+
 
 function setVideosInURL() {
   const videos = useStore.getState().videos;
@@ -36,6 +47,8 @@ function setVideosInURL() {
     "",
     `${window.location.pathname}?${params.toString()}`
   );
+
+  copyToClipboard(window.location.href)
 }
 
 const useStore = create<State>()(
@@ -96,7 +109,12 @@ const useStore = create<State>()(
         },
         setSettingsOpen: (value: boolean) => {
           set({ settingsOpen: value });
-        }
+        },
+        setVideoUrl(index, value) {
+          const videos = get().videos;
+          videos[index].url = value;
+          set({ videos });
+        },
       }),
       {
         name: "app",

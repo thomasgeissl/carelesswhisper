@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
 import Jam from "./Jam";
 import Intro from "./Intro";
-import useStore from "./store";
+import useStore, { setVideosInURL } from "./store";
 import SettingsIcon from "@mui/icons-material/Settings";
+import ShareIcon from "@mui/icons-material/Share";
 import Settings from "./Settings";
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
           {!settingsOpen && (
             <>
               <Jam></Jam>
+              <ShareIcon
+                sx={{ position: "fixed", top: 15, right: 50 }}
+                onClick={() => setVideosInURL()}
+              ></ShareIcon>
               <SettingsIcon
                 sx={{ position: "fixed", top: 15, right: 15 }}
                 onClick={() => setSettingsOpen(true)}

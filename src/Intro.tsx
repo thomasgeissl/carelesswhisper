@@ -36,13 +36,24 @@ function Intro() {
     >
       {!started && (
         <Box>
-          <Typography variant="body2">
-            you should use an ad blocker or the brave browser, otherwise it
-            might be even more annoying
+          <Typography variant="h4">
+            Hello, free jazz lover, <br />
+            If you aren’t already, consider using an ad blocker or the Brave
+            browser.
           </Typography>
-          <Button variant="outlined" onClick={() => setStarted(true)}>
-            start
-          </Button>
+          <Typography variant="h4" marginTop={"64px"}>
+            Before the show begins, there will be a couple of questions.
+          </Typography>
+          <Box display={"flex"}>
+            <Box flex={1}></Box>
+            <Button
+              variant="outlined"
+              onClick={() => setStarted(true)}
+              sx={{ marginTop: "64px" }}
+            >
+              start
+            </Button>
+          </Box>
           {/* <Button
             onClick={() => {
               setVideosInURL();
