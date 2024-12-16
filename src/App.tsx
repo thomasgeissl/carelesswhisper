@@ -5,6 +5,7 @@ import useStore, { setVideosInURL } from "./store";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ShareIcon from "@mui/icons-material/Share";
 import Settings from "./Settings";
+import Notifications from "./Notifications";
 
 function App() {
   const step = useStore((state) => state.step);
@@ -42,6 +43,7 @@ function App() {
             </>
           )}
           {settingsOpen && <Settings></Settings>}
+          <Notifications></Notifications>
         </>
       )}
     </Box>
