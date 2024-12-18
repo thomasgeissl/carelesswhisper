@@ -8,47 +8,17 @@ interface State {
   started: boolean;
   step: number;
   settingsOpen: boolean;
+  showCopiedNotification: boolean;
   setStarted(value: boolean): void;
   setStep(value: number): void;
   setVideos(videos: Video[]): void;
   setSettingsOpen(value: boolean): void;
   setVideoUrl(index: number, value: string): void;
+  setShowCopiedNotification(value: boolean): void;
 }
 interface Video {
   url: string;
   volume: number;
-}
-
-function extractVideoId(url: string) {
-  const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/.*[?&]v=([^&]+)/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
-}
-
-async function copyToClipboard(text: string) {
-  try {
-      await navigator.clipboard.writeText(text);
-      console.log("Copied to clipboard:", text);
-  } catch (err) {
-      console.error("Failed to copy text:", err);
-  }
-}
-
-
-function setVideosInURL() {
-  const videos = useStore.getState().videos;
-  const urls = videos.map((video) => {
-    return extractVideoId(video.url);
-  });
-  const params = new URLSearchParams(window.location.search);
-  params.set("videos", encodeURIComponent(JSON.stringify(urls)));
-  window.history.replaceState(
-    null,
-    "",
-    `${window.location.pathname}?${params.toString()}`
-  );
-
-  copyToClipboard(window.location.href)
 }
 
 const useStore = create<State>()(
@@ -98,6 +68,7 @@ const useStore = create<State>()(
         started: false,
         step: -1,
         settingsOpen: false,
+        showCopiedNotification: false,
         setStarted: (value: boolean) => {
           set({ started: value });
         },
@@ -115,6 +86,9 @@ const useStore = create<State>()(
           videos[index].url = value;
           set({ videos });
         },
+        setShowCopiedNotification(value) {
+          set({ showCopiedNotification: value });
+        }
       }),
       {
         name: "app",
@@ -142,6 +116,40 @@ function getVideosFromURL(): Video[] {
   }
   return [];
 }
+
+function extractVideoId(url: string) {
+  const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/.*[?&]v=([^&]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+}
+
+async function copyToClipboard(text: string) {
+  try {
+      await navigator.clipboard.writeText(text);
+      console.log("Copied to clipboard:", text);
+      useStore().setShowCopiedNotification(true);
+  } catch (err) {
+      console.error("Failed to copy text:", err);
+  }
+}
+
+
+function setVideosInURL() {
+  const videos = useStore.getState().videos;
+  const urls = videos.map((video) => {
+    return extractVideoId(video.url);
+  });
+  const params = new URLSearchParams(window.location.search);
+  params.set("videos", encodeURIComponent(JSON.stringify(urls)));
+  window.history.replaceState(
+    null,
+    "",
+    `${window.location.pathname}?${params.toString()}`
+  );
+
+  copyToClipboard(window.location.href)
+}
+
 
 export default useStore;
 export { setVideosInURL, getVideosFromURL };
