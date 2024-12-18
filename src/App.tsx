@@ -1,16 +1,20 @@
 import { Box } from "@mui/material";
 import Jam from "./Jam";
 import Intro from "./Intro";
-import useStore, { setVideosInURL } from "./store";
+import useStore, { getVideosFromURL, setVideosInURL } from "./store";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ShareIcon from "@mui/icons-material/Share";
 import Settings from "./Settings";
 import Notifications from "./Notifications";
+import { useEffect } from "react";
 
 function App() {
   const step = useStore((state) => state.step);
   const settingsOpen = useStore((state) => state.settingsOpen);
   const setSettingsOpen = useStore((state) => state.setSettingsOpen);
+  useEffect(() => {
+    getVideosFromURL()
+  }, [])
   return (
     <Box width={"100vw"} height={"100vh"}>
       <Intro></Intro>

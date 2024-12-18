@@ -115,6 +115,7 @@ function getVideosFromURL(): Video[] {
         volume: 0.4,
       };
     });
+    console.log(videoObjects)
     useStore.getState().setVideos(videoObjects);
   }
   return [];
@@ -143,8 +144,9 @@ async function copyToClipboard(text: string) {
   try {
       await navigator.clipboard.writeText(text);
       console.log("Copied to clipboard:", text);
-      useStore().setShowCopiedNotification(true);
+      useStore.getState().setShowCopiedNotification(true);
   } catch (err) {
+    console.log(text)
       console.error("Failed to copy text:", err);
   }
 }

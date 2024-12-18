@@ -96,7 +96,7 @@ function Intro() {
           {step === 3 && (
             <ReactPlayer
               url={"https://www.youtube.com/watch?v=iZcWtrE33FI"}
-              autoplay={true}
+              autoPlay={true}
             ></ReactPlayer>
           )}
           <Box flex={1}></Box>
