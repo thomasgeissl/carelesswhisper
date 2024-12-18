@@ -82,7 +82,7 @@ const useStore = create<State>()(
           set({ settingsOpen: value });
         },
         setVideoUrl(index, value) {
-          const videos = get().videos;
+          const videos = [...get().videos]
           videos[index].url = value;
           set({ videos });
         },
@@ -105,23 +105,39 @@ function getVideosFromURL(): Video[] {
   const videos = params.get("videos");
   if (videos) {
     const urls = JSON.parse(decodeURIComponent(videos));
-    const videoObjects = urls.map((url: string) => {
+    const videoObjects = urls.map((id: string) => {
+      const isShorts = id.length < 12; // Short IDs are usually shorter than standard IDs
+      const baseUrl = isShorts
+        ? `https://www.youtube.com/shorts/${id}`
+        : `https://www.youtube.com/watch?v=${id}`;
       return {
-        url: `https://www.youtube.com/watch?v=${url}`,
+        url: baseUrl,
         volume: 0.4,
       };
-      // useStore.set
     });
     useStore.getState().setVideos(videoObjects);
   }
   return [];
 }
 
+
 function extractVideoId(url: string) {
-  const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/.*[?&]v=([^&]+)/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
+  const videoRegex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/.*[?&]v=([^&]+)/;
+  const shortsRegex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([^?]+)/;
+  const youtuBeRegex = /(?:https?:\/\/)?youtu\.be\/([^?]+)/;
+
+  let match = url.match(videoRegex);
+  if (match) return match[1];
+
+  match = url.match(shortsRegex);
+  if (match) return match[1];
+
+  match = url.match(youtuBeRegex);
+  if (match) return match[1];
+
+  return null;
 }
+
 
 async function copyToClipboard(text: string) {
   try {
