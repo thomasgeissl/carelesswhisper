@@ -25,6 +25,9 @@ function Intro() {
       flexDirection={"column"}
       padding={"12px"}
       onClick={() => {
+        if(!started){
+          return
+        }
         setStep(step + 1);
         if (step > steps.length - 2) {
           window.scrollTo({

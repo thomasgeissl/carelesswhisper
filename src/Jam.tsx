@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Grid, Grid2 } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import ReactPlayer from "react-player";
 import useStore from "./store";
 
@@ -17,7 +17,7 @@ function Jam() {
             key={index}
             sx={{
               border: "1px solid #000",
-              opacity: !highlight || index == 4 ? 1 : 0.2,
+              opacity: !highlight || index == 4 ? 1 : 0.4,
             }}
             onClick={() => {
               if (index !== 4) {

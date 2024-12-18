@@ -66,7 +66,7 @@ const useStore = create<State>()(
           },
         ],
         started: false,
-        step: -1,
+        step: 0,
         settingsOpen: false,
         showCopiedNotification: false,
         setStarted: (value: boolean) => {
