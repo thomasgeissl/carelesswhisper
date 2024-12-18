@@ -54,20 +54,6 @@ function Intro() {
               start
             </Button>
           </Box>
-          {/* <Button
-            onClick={() => {
-              setVideosInURL();
-            }}
-          >
-            save
-          </Button>
-          <Button
-            onClick={() => {
-              getVideosFromURL();
-            }}
-          >
-            load
-          </Button> */}
         </Box>
       )}
       {started && (
