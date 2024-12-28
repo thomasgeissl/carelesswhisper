@@ -17,7 +17,7 @@ function Jam() {
             key={index}
             sx={{
               border: "1px solid #000",
-              opacity: !highlight || index == 4 ? 1 : 0.4,
+              // opacity: !highlight || index == 4 ? 1 : 0.4,
             }}
             onClick={() => {
               if (index !== 4) {

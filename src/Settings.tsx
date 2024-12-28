@@ -24,9 +24,6 @@ function Settings() {
       </Box>
       <Box marginTop={"32px"}>
         {videos.map((v, index) => {
-          if (index === 4) {
-            return <Box key={`video-${index}`}></Box>;
-          }
           return (
             <TextField
               key={`video-${index}}`}
